@@ -1,5 +1,6 @@
 from flask import Flask, request
 from flask_cors import CORS
+import pymysql
 
 import json
 import constants
@@ -8,6 +9,7 @@ import message
 
 app = Flask(__name__)
 CORS(app)
+
 
 @app.route("/")
 def route_main():
