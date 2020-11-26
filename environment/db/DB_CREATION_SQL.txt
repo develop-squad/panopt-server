@@ -1,0 +1,92 @@
+-- 테이블 순서는 관계를 고려하여 한 번에 실행해도 에러가 발생하지 않게 정렬되었습니다.
+
+-- devices Table Create SQL
+CREATE TABLE devices
+(
+    `device_index`    INT            NOT NULL    AUTO_INCREMENT COMMENT 'device index', 
+    `device_id`       VARCHAR(45)    NULL        COMMENT 'device id', 
+    `device_created`  VARCHAR(45)    NULL        COMMENT 'device created', 
+    PRIMARY KEY (device_index)
+);
+
+ALTER TABLE devices COMMENT 'devices';
+
+
+-- devices Table Create SQL
+CREATE TABLE messages
+(
+    `message_index`    INT            NOT NULL    AUTO_INCREMENT COMMENT 'message index', 
+    `message_device`   INT            NULL        COMMENT 'message device', 
+    `message_sent`     INT            NULL        COMMENT 'message read', 
+    `message_type`     INT            NULL        COMMENT 'message type', 
+    `message_title`    VARCHAR(45)    NULL        COMMENT 'message title', 
+    `message_content`  VARCHAR(45)    NULL        COMMENT 'message content', 
+    `message_data`     VARCHAR(45)    NULL        COMMENT 'message data', 
+    PRIMARY KEY (message_index)
+);
+
+ALTER TABLE messages COMMENT 'messages';
+
+
+-- devices Table Create SQL
+CREATE TABLE processes
+(
+    `process_index`  INT            NOT NULL    AUTO_INCREMENT COMMENT 'process index', 
+    `process_name`   VARCHAR(45)    NULL        COMMENT 'process name', 
+    `process_type`   INT            NULL        COMMENT 'process type', 
+    `process_level`  INT            NULL        COMMENT 'process level', 
+    PRIMARY KEY (process_index)
+);
+
+ALTER TABLE processes COMMENT 'processes';
+
+
+-- devices Table Create SQL
+CREATE TABLE networks
+(
+    `network_index`       INT            NOT NULL    AUTO_INCREMENT COMMENT 'network index', 
+    `network_device`      INT            NULL        COMMENT 'network device', 
+    `network_process`     INT            NULL        COMMENT 'network process', 
+    `network_status`      INT            NULL        COMMENT 'network status', 
+    `network_start`       TIMESTAMP      NULL        COMMENT 'network start', 
+    `network_end`         TIMESTAMP      NULL        COMMENT 'network end', 
+    `network_type`        INT            NULL        COMMENT 'network type', 
+    `network_srcip`       VARCHAR(45)    NULL        COMMENT 'network src ip', 
+    `network_dstip`       VARCHAR(45)    NULL        COMMENT 'network dst ip', 
+    `network_srcdevice`   VARCHAR(45)    NULL        COMMENT 'network src device', 
+    `network_dstdevice`   VARCHAR(45)    NULL        COMMENT 'network dst device', 
+    `network_protocol`    INT            NULL        COMMENT 'network protocol', 
+    `network_srcport`     INT            NULL        COMMENT 'network src port', 
+    `network_dstport`     INT            NULL        COMMENT 'network dst port', 
+    `network_srcpackets`  INT            NULL        COMMENT 'network src packets', 
+    `network_dstpackets`  INT            NULL        COMMENT 'network dst packets', 
+    `network_srcbytes`    INT            NULL        COMMENT 'network src bytes', 
+    `network_dstbytes`    INT            NULL        COMMENT 'network dst bytes', 
+    PRIMARY KEY (network_index)
+);
+
+ALTER TABLE networks COMMENT 'networks';
+
+
+-- devices Table Create SQL
+CREATE TABLE packets
+(
+    `packet_index`      INT            NOT NULL    AUTO_INCREMENT COMMENT 'packet index', 
+    `packet_device`     INT            NULL        COMMENT 'packet device', 
+    `packet_process`    INT            NULL        COMMENT 'packet process', 
+    `packet_network`    INT            NULL        COMMENT 'packet network', 
+    `packet_type`       INT            NULL        COMMENT 'packet type', 
+    `packet_srcip`      VARCHAR(45)    NULL        COMMENT 'packet src ip', 
+    `packet_dstip`      VARCHAR(45)    NULL        COMMENT 'packet dst ip', 
+    `packet_srcdevice`  VARCHAR(45)    NULL        COMMENT 'packet src device', 
+    `packet_dstdevice`  VARCHAR(45)    NULL        COMMENT 'packet dst device', 
+    `packet_protocol`   INT            NULL        COMMENT 'packet protocol', 
+    `packet_srcport`    INT            NULL        COMMENT 'packet src port', 
+    `packet_dstport`    INT            NULL        COMMENT 'packet dst port', 
+    `packet_length`     INT            NULL        COMMENT 'packet length', 
+    PRIMARY KEY (packet_index)
+);
+
+ALTER TABLE packets COMMENT 'packets';
+
+

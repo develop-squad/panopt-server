@@ -1,14 +1,32 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from flask_cors import CORS
+from werkzeug.exceptions import HTTPException
+import logging
+import traceback
 import pymysql
-
 import json
+
 import constants
 import response
 import message
 
 app = Flask(__name__)
+logger = logging.getLogger()
 CORS(app)
+
+
+@app.errorhandler(HTTPException)
+def handle_http_exception(error):
+    error_dict = {
+        'code': error.code,
+        'description': error.description,
+        'stack_trace': traceback.format_exc()
+    }
+    log_msg = f"HTTPException {error_dict.code}, Description: {error_dict.description}, Stack trace: {error_dict.stack_trace}"
+    logger.log(msg=log_msg)
+    log_response = jsonify(error_dict)
+    log_response.status_code = error.code
+    return log_response
 
 
 @app.route("/")
@@ -95,3 +113,18 @@ def response_message(response_code, messages):
 
 if __name__ == "__main__":
     app.run(host=constants.SERVER_IP, port=constants.SERVER_PORT)
+
+'''
+    db = pymysql.connect(
+        host=constants.DB_HOST,
+        port=constants.DB_PORT,
+        user=constants.DB_USER,
+        passwd=constants.DB_PASSWD,
+        db=constants.DB_NAME,
+        charset=constants.DB_CHARSET,
+        autocommit=constants.DB_AUTOCOMMIT)
+    cursor = db.cursor()
+    cursor.execute("SELECT VERSION()")
+    data = cursor.fetchone()
+    db.close()
+    '''
